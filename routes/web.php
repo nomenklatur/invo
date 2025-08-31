@@ -34,13 +34,9 @@ Route::get('php/', function () {
     return phpinfo();
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // User Management
     Route::resource('/users', UserController::class); //->except(['show']);
