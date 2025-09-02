@@ -31,6 +31,12 @@ class UpdateCategoryRequest extends FormRequest
                 'required',
                 'alpha_dash',
                 Rule::unique('categories')->ignore($this->category)
+            ],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:2048',
             ]
         ];
     }

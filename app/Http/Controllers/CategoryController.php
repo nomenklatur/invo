@@ -24,7 +24,13 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        Category::create($request->validated());
+        $payload = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $payload['image'] = $request->file('image')->store('categories', 'public');
+        }
+
+        Category::create($payload);
 
         return redirect()
             ->route('categories.index')
@@ -47,7 +53,10 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $category->update($request->all());
+        $payload = $request->validated();
+        $payload['image'] = $request->hasFile('image') ? $request->file('image')->store('categories', 'public') : $category->image;
+
+        $category->update($payload);
 
         return redirect()
             ->route('categories.index')

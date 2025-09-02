@@ -30,6 +30,12 @@ class StoreCategoryRequest extends FormRequest
                 'required',
                 'unique:categories,slug',
                 'alpha_dash'
+            ],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:2048'
             ]
         ];
     }

@@ -14,12 +14,49 @@
                     <x-action.close route="{{ route('categories.index') }}" />
                 </div>
             </div>
-            <form method="POST" action="{{ route('categories.store') }}">
+            <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
             @csrf
                 <div class="card-body">
-                    <livewire:name />
+                    <div class="row">
+                        <div class="col-lg-4">
+                             <div class="card-body">
+                                <h3 class="card-title">
+                                    {{ __('Category Image') }}
+                                </h3>
 
-                    <livewire:slug />
+                                <img
+                                    class="img-account-profile mb-2"
+                                    src="{{ asset('assets/img/products/default.webp') }}"
+                                    width="100"
+                                    id="image-preview"
+                                />
+
+                                <div class="small font-italic text-muted mb-2">
+                                    JPG or PNG no larger than 2 MB
+                                </div>
+
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="image"
+                                    name="image"
+                                    class="form-control @error('image') is-invalid @enderror"
+                                    onchange="previewImage();"
+                                >
+
+                                @error('image')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <livewire:name />
+                            <livewire:slug />
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div class="card-footer text-end">
@@ -36,3 +73,6 @@
     </div>
 </div>
 @endsection
+@pushonce('page-scripts')
+    <script src="{{ asset('assets/js/img-preview.js') }}"></script>
+@endpushonce
