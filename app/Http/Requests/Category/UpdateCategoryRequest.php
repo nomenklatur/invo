@@ -35,9 +35,10 @@ class UpdateCategoryRequest extends FormRequest
             'image' => [
                 'nullable',
                 'image',
-                'mimes:jpeg,png,jpg,gif,svg',
+                'mimes:jpeg,png,jpg,gif,svg,webp',
                 'max:2048',
-            ]
+            ],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

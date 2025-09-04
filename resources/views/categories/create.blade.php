@@ -55,6 +55,26 @@
                             <livewire:name />
                             <livewire:slug />
                         </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="notes" class="form-label">
+                                    {{ __('Description') }}
+                                </label>
+
+                                <textarea name="description"
+                                            id="description"
+                                            rows="5"
+                                            class="form-control @error('description') is-invalid @enderror"
+                                            placeholder="Category description..."
+                                ></textarea>
+
+                                @error('description')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
